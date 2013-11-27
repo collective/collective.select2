@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<layers>
+  <layer name="collective.select2"
+         interface="collective.select2.interfaces.IBrowserLayer" />
+</layers>
