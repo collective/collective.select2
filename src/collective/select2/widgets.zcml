@@ -1,0 +1,18 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
+    i18n_domain="collective.select2">
+
+  <z3c:widgetTemplate
+    mode="input"
+    template="input.pt"
+    layer="z3c.form.interfaces.IFormLayer"
+    widget=".interfaces.IUserTokenInputWidget"
+    />
+
+  <adapter
+    factory=".converter.UserTokenConverter"
+  />
+
+</configure>

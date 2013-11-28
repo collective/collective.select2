@@ -4,7 +4,6 @@
 <input
     id="" name="" class="" type="hidden"
     tabindex="" disabled="" readonly="" accesskey=""
-    tal:define="value view/value"
     tal:attributes="id view/id;
                     name view/name;
                     class view/klass;
@@ -29,6 +28,7 @@
                     readonly view/readonly;
                     accesskey view/accesskey;
                     onselect view/onselect;
-                    value python:value and ','.join(value) or '';
+                    value view/value;
+                    data-usertoken-initialvalues view/initialvalues;
                     data-usertoken-url view/usertoken_url" />
 </html>

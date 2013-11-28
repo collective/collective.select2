@@ -1,0 +1,31 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="collective.select2">
+
+  <browser:resourceDirectory
+    directory="static"
+    name="usertokeninput"
+    layer=".interfaces.IBrowserLayer"
+    />
+
+  <browser:page
+    for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
+    name="users_search"
+    class=".browser.UsersSearch"
+    permission="zope2.View"
+    layer=".interfaces.IBrowserLayer"
+  />
+
+<!--
+  <browser:page
+    for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
+    name="demo-usertoken"
+    class=".demo.UserForm"
+    permission="zope2.View"
+    layer=".interfaces.IBrowserLayer"
+  />
+ -->
+
+</configure>

@@ -3,10 +3,12 @@
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:gs="http://namespaces.zope.org/genericsetup"
     xmlns:z3c="http://namespaces.zope.org/z3c"
-    xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="collective.select2">
 
   <includeDependencies package="." />
+
+  <include file="browser.zcml" />
+  <include file="widgets.zcml" />
 
   <gs:registerProfile
     name="default"
@@ -22,39 +24,5 @@
       interface=".interfaces.IUserTokenInputWidget"
     />
   </class>
-
-  <browser:resourceDirectory
-    directory="static"
-    name="usertokeninput"
-    layer=".interfaces.IBrowserLayer"
-    />
-
-  <browser:page
-    for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
-    name="users_search"
-    class=".browser.users_search"
-    permission="zope2.View"
-    layer=".interfaces.IBrowserLayer"
-  />
-
-  <z3c:widgetTemplate
-    mode="input"
-    template="input.pt"
-    layer="z3c.form.interfaces.IFormLayer"
-    widget=".interfaces.IUserTokenInputWidget"
-    />
-
-  <adapter
-    factory=".converter.UserTokenConverter"
-  />
-
-
-  <browser:page
-    for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
-    name="demo-usertoken"
-    class=".demo.UserForm"
-    permission="zope2.View"
-    layer=".interfaces.IBrowserLayer"
-  />
 
 </configure>

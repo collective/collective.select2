@@ -7,9 +7,22 @@ from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
 
 
-class users_search(BrowserView):
+class BaseSearch(BrowserView):
 
-    def results(self, search_term):
+    def results(self, search_term, strict=False):
+        """Search ..."""
+
+    def __call__(self):
+        results = self.results(
+            self.request.form.get('term'),
+            self.request.form.get('strict')
+        )
+        return json.dumps([i for i in results])
+
+
+class UsersSearch(BaseSearch):
+
+    def results(self, search_term, strict=False):
         """Search for users and returning member items
         """
         mtool = getToolByName(self.context, 'portal_membership')
@@ -32,12 +45,3 @@ class users_search(BrowserView):
                 "text": usr.getProperty('fullname') or u['id'],
                 "id": u['id']
             }
-
-        yield {
-            "text": search_term,
-            "id": search_term
-        }
-
-    def __call__(self):
-        results = self.results(self.request.form.get('term'))
-        return json.dumps([i for i in results])

@@ -1,7 +1,5 @@
 import json
-import zope.component
 import zope.interface
-import zope.schema
 from zope.component.hooks import getSite
 from z3c.form import interfaces
 from z3c.form.widget import SequenceWidget
@@ -37,6 +35,17 @@ class UserTokenInputWidget(widget.HTMLTextInputWidget, SequenceWidget):
                 except LookupError:
                     return default
         return value
+
+    def initialvalues(self):
+        values = {}
+        if self.value:
+            for token in self.value.split(','):
+                try:
+                    term = self.terms.getTermByToken(token)
+                except LookupError:
+                    continue
+                values[token] = term.title
+        return json.dumps(values)
 
 
 @zope.interface.implementer(interfaces.IFieldWidget)

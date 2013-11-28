@@ -20,19 +20,16 @@
             self.trigger.select2({
                 minimumInputLength: 3,
                 width: 'element',
-                // tokenSeparators: ['\n', ' '],
-                // query: function (query) {
-                //     var data = {results: []};
-                //     data.results.push({id: query.term, text: query.term});
-                //     query.callback(data);
-                // },
-                // initSelection : function (element, callback) {
-                //     var data = [];
-                //     $(element.val().split(",")).each(function () {
-                //         data.push({id: this, text: this});
-                //     });
-                //     callback(data);
-                // }
+                initSelection : function (element, callback) {
+                    var data = [],
+                        initialValues = self.trigger.data('usertoken-initialvalues');
+
+                    $(element.val().split(",")).each(function () {
+                        data.push({id: this, text: initialValues[this]});
+                    });
+                    callback(data);
+                },
+
                 ajax: {
                     url: self.trigger.data('usertoken-url'),
                     dataType: 'json',
@@ -49,8 +46,6 @@
                     }
                 },
                 multiple: true
-                // placeholder: "Select..."
-                // width: 'element',
             });
         }
     };

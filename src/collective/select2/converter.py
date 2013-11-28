@@ -13,7 +13,14 @@ class UserTokenConverter(CollectionSequenceDataConverter):
 
     def toWidgetValue(self, value):
         """Convert from text lines to HTML representation."""
-        # if the value is the missing value, then an empty list is produced.
         if value is self.field.missing_value:
             return u''
-        return value
+        return ','.join(value)
+
+    def toFieldValue(self, value):
+        """See interfaces.IDataConverter"""
+        widget = self.widget
+        if widget.terms is None:
+            widget.updateTerms()
+        get_term = lambda x: widget.terms.getValue(x)
+        return [get_term(token) for token in value if get_term(token)]
