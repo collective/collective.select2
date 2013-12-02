@@ -6,26 +6,32 @@
 
   <browser:resourceDirectory
     directory="static"
-    name="usertokeninput"
+    name="select2widgets"
     layer=".interfaces.IBrowserLayer"
     />
 
   <browser:page
     for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
-    name="users_search"
+    name="select2-users-search"
     class=".browser.UsersSearch"
     permission="zope2.View"
     layer=".interfaces.IBrowserLayer"
   />
 
-<!--
   <browser:page
     for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
-    name="demo-usertoken"
-    class=".demo.UserForm"
+    name="select2-subjects-search"
+    class=".browser.SubjectsSearch"
     permission="zope2.View"
     layer=".interfaces.IBrowserLayer"
   />
- -->
+
+  <browser:page
+    for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
+    name="demo-select2"
+    class=".demo.View"
+    permission="zope2.View"
+    layer=".interfaces.IBrowserLayer"
+  />
 
 </configure>

@@ -1,20 +1,20 @@
-/*global window, jQuery, document, alert */
+/*global window, jQuery, document */
 (function ($) {
     "use strict";
-    if ((typeof window.usertokeninput) === 'undefined') {
-        window.usertokeninput = {};
+    if ((typeof window.select2widgets) === 'undefined') {
+        window.select2widgets = {};
     }
 
-    var usertokeninput = window.usertokeninput;
+    var select2widgets = window.select2widgets;
 
-    usertokeninput.userTokenInput = function (trigger, settings) {
+    select2widgets.select2InputWidget = function (trigger, settings) {
         var self = this;
         $.extend(this, settings);
         self.trigger = $(trigger);
         self.init();
     };
 
-    usertokeninput.userTokenInput.prototype = {
+    select2widgets.select2InputWidget.prototype = {
         init: function () {
             var self = this;
             self.trigger.select2({
@@ -22,7 +22,7 @@
                 width: 'element',
                 initSelection : function (element, callback) {
                     var data = [],
-                        initialValues = self.trigger.data('usertoken-initialvalues');
+                        initialValues = self.trigger.data('select2Initialvalues');
 
                     $(element.val().split(",")).each(function () {
                         data.push({id: this, text: initialValues[this]});
@@ -31,12 +31,12 @@
                 },
 
                 ajax: {
-                    url: self.trigger.data('usertoken-url'),
+                    url: self.trigger.data('select2Url'),
                     dataType: 'json',
                     data: function (term, page) {
                         return {
                             term: term,
-                            strict: true
+                            add_terms: true
                         };
                     },
                     results: function (data, page) {
@@ -51,20 +51,19 @@
     };
 
     $.fn.extend({
-        userTokenInput: function (options) {
+        select2InputWidget: function (options) {
             return this.each(function () {
 
                 var settings = $.extend(true, {}, options),
                     $this = $(this),
-                    data = $this.data('usertokeninput'),
+                    data = $this.data('select'),
                     widget;
 
                 // If the plugin hasn't been initialized yet
                 if (!data) {
-                    widget = new usertokeninput.userTokenInput(this, settings);
+                    widget = new select2widgets.select2InputWidget(this, settings);
 
-                    $(this).data('usertokeninput', {
-                        target: $this,
+                    $(this).data('select2InputWidget', {
                         widget: widget
                     });
                 }
@@ -73,7 +72,7 @@
     });
 
     $(document).ready(function() {
-        $('.usertokeninput-widget').userTokenInput();
+        $('.select2-widget').select2InputWidget();
     });
 
 }(jQuery));

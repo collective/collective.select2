@@ -8,7 +8,7 @@
       cookable="True"
       enabled="on"
       expression=""
-      id="++resource++usertokeninput/select2/select2.css"
+      id="++resource++select2widgets/select2/select2.css"
       media="screen"
       rel="stylesheet"
       rendering="link"

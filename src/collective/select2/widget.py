@@ -9,23 +9,43 @@ from z3c.form.browser import widget
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from .interfaces import IUserTokenInputWidget
+from .interfaces import ISelect2Widget
 
 
-class UserTokenInputWidget(widget.HTMLTextInputWidget, SequenceWidget):
-    zope.interface.implementsOnly(IUserTokenInputWidget)
+class Select2Widget(widget.HTMLTextInputWidget, SequenceWidget):
+    zope.interface.implementsOnly(ISelect2Widget)
     input_template = ViewPageTemplateFile('input.pt')
-    klass = u"usertokeninput-widget"
+    klass = u"select2-widget"
 
     @property
-    def usertoken_url(self):
-        portal = getSite()
-        return "{}/users_search".format(portal.absolute_url())
+    def search_url(self):
+        search_view = self.field.search_view
+        if callable(search_view):
+            portal = getSite()
+            return search_view(portal.absolute_url())
+        return search_view
+
+    @property
+    def initial_values(self):
+        values = {}
+        if self.value:
+            base = self.value
+            if not isinstance(base, list):
+                base = self.value.split(',')
+            for token in base:
+                try:
+                    term = self.terms.getTermByToken(token)
+                except LookupError:
+                    continue
+
+                if term.title:
+                    values[token] = term.title
+        return json.dumps(values)
 
     def extract(self, default=interfaces.NO_VALUE):
         """See z3c.form.interfaces.IWidget."""
         value = self.request.get(self.name, default)
-        if value != default:
+        if value != u'' and value != default:
             value = value.split(',')
             for token in value:
                 if token == self.noValueToken:
@@ -36,19 +56,8 @@ class UserTokenInputWidget(widget.HTMLTextInputWidget, SequenceWidget):
                     return default
         return value
 
-    def initialvalues(self):
-        values = {}
-        if self.value:
-            for token in self.value.split(','):
-                try:
-                    term = self.terms.getTermByToken(token)
-                except LookupError:
-                    continue
-                values[token] = term.title
-        return json.dumps(values)
-
 
 @zope.interface.implementer(interfaces.IFieldWidget)
-def UserTokenInputFieldWidget(field, request):
-    """IFieldWidget factory for UserTokenInputWidget."""
-    return FieldWidget(field, UserTokenInputWidget(request))
+def Select2FieldWidget(field, value_type, request):
+    """IFieldWidget factory for Select2Widget."""
+    return FieldWidget(field, Select2Widget(request))

@@ -614,14 +614,15 @@ disabled look for disabled choices in the results dropdown
   }
 }
 
+/* Plone specific styles */
 .field .choice-field,
-.field input[type="hidden"].usertokeninput-widget {
+.field input[type="hidden"].select2-widget {
     width: 30em
 }
 
-#content .usertokeninput-widget a:link {
+#content .select2-container a:link {
     border: 0;
 }
-#content .usertokeninput-widget ul {
+#content .select2-container ul {
     margin-left: 0;
 }

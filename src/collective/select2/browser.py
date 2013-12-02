@@ -9,20 +9,20 @@ from Products.Five.browser import BrowserView
 
 class BaseSearch(BrowserView):
 
-    def results(self, search_term, strict=False):
+    def results(self, search_term, add_terms=False):
         """Search ..."""
 
     def __call__(self):
         results = self.results(
             self.request.form.get('term'),
-            self.request.form.get('strict')
+            self.request.form.get('add_terms')
         )
         return json.dumps([i for i in results])
 
 
 class UsersSearch(BaseSearch):
 
-    def results(self, search_term, strict=False):
+    def results(self, search_term, add_terms=False):
         """Search for users and returning member items
         """
         mtool = getToolByName(self.context, 'portal_membership')
@@ -45,3 +45,16 @@ class UsersSearch(BaseSearch):
                 "text": usr.getProperty('fullname') or u['id'],
                 "id": u['id']
             }
+
+
+class SubjectsSearch(BaseSearch):
+
+    def results(self, search_term, add_terms=False):
+        from Products.CMFCore.utils  import getToolByName
+        pc = getToolByName(self.context, 'portal_catalog')
+        index = pc._catalog.getIndex('Subject')
+        # TODO: complete
+        yield {
+            "text": search_term,
+            "id": search_term
+        }

@@ -1,21 +1,16 @@
-import zope.schema
 from z3c.form.converter import CollectionSequenceDataConverter
-
 from z3c.form import util
-from  .interfaces import IUserTokenInputWidget
 
 
-class UserTokenConverter(CollectionSequenceDataConverter):
-    """Data converter for IUserTokenInputWidget."""
-
-    zope.component.adapts(
-        zope.schema.interfaces.ISequence, IUserTokenInputWidget)
+class Select2Converter(CollectionSequenceDataConverter):
+    """Data converter for ISelect2Widget."""
 
     def toWidgetValue(self, value):
         """Convert from text lines to HTML representation."""
+
         if value is self.field.missing_value:
-            return u''
-        return ','.join(value)
+            return ()
+        return value
 
     def toFieldValue(self, value):
         """See interfaces.IDataConverter"""
