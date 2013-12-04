@@ -1,5 +1,6 @@
 from zope.interface import Interface
 from zope.schema.interfaces import IList
+from zope.schema.interfaces import IChoice
 from zope.schema._bootstrapfields import Field
 from zope.schema._bootstrapfields import Bool
 from plone.theme.interfaces import IDefaultPloneLayer
@@ -10,8 +11,18 @@ class IBrowserLayer(IDefaultPloneLayer):
     pass
 
 
-class ISelect2Field(IList):
-    """It inherits from IList and add to that field the search_view
+class ISelect2Field(IChoice):
+    """It inherits from IChoice and add to the field the search_view
+    parameter
+    """
+    search_view = Field(
+        title=u"search view url",
+        description=u""
+    )
+
+
+class ISelect2MultiField(IList):
+    """It inherits from IList and add to the field the search_view
     parameter
 
     Usage:
@@ -19,18 +30,17 @@ class ISelect2Field(IList):
     >>> from zope.import schema
     >>> from zope.interface import Interface
     >>> from z3c.form import form, fields
-    >>> from collective.select2.field import Select2Field
+    >>> from collective.select2.field import Select2MultiField
     >>> from collective.select2.widget import UserTokenFieldWidget
 
     >>> class ISchema(Interface):
-    >>>     users = Select2Field(
+    >>>     users = Select2MultiField(
     ...         title=u"Users",
     ...         value_type=schema.Choice(
     ...             title=u"User ID",
     ...             source="plone.app.vocabularies.Users"
     ...         ),
     ...     search_view='search_url',
-    ...     add_terms=True,
     ...     required=True
     ... )
 
@@ -39,17 +49,20 @@ class ISelect2Field(IList):
     """
 
     search_view = Field(
-        title=u"search_view",
+        title=u"search view url",
         description=u""
     )
 
-    add_terms = Bool(
-        title=u'Add terms',
-        description=u'',
-        default=False
-    )
+
+class ISelect2Widget(interfaces.ITextLinesWidget):
+    """Select2 widget for ISelect2MultiField and value_type TextLine
+    """
 
 
-class ISelect2Widget(interfaces.IOrderedSelectWidget):
-    """Select2 widget for ISelect2Field
+class ISelect2MultiWidget(interfaces.IOrderedSelectWidget):
+    pass
+
+
+class ISelect2CollectionWidget(ISelect2MultiWidget):
+    """Select2 widget for ISelect2MultiField and value_type Choice
     """

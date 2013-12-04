@@ -18,10 +18,10 @@
     provides="Products.GenericSetup.interfaces.EXTENSION"
   />
 
-  <class class=".widget.Select2Widget">
+  <class class=".widget.Select2CollectionWidget">
     <require
       permission="zope.Public"
-      interface=".interfaces.ISelect2Widget"
+      interface=".interfaces.ISelect2CollectionWidget"
     />
   </class>
 

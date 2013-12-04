@@ -4,6 +4,9 @@ Changelog
 1.0-dev (unreleased)
 --------------------
 
+- Add specific fields for single and multiple selection widgets
+  [giorgio]
+
 - Improved IUserTokenInputWidget and UserSearch view
   [gborelli]
 

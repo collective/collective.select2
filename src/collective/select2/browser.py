@@ -47,14 +47,31 @@ class UsersSearch(BaseSearch):
             }
 
 
-class SubjectsSearch(BaseSearch):
+class CatalogIndexSearch(BaseSearch):
+    _index = "Subject"
 
     def results(self, search_term, add_terms=False):
-        from Products.CMFCore.utils  import getToolByName
         pc = getToolByName(self.context, 'portal_catalog')
-        index = pc._catalog.getIndex('Subject')
-        # TODO: complete
-        yield {
-            "text": search_term,
-            "id": search_term
-        }
+        index = pc._catalog.getIndex(self._index)
+
+        found = False
+
+        for i in index._index:
+            if search_term == i:
+                found = True
+
+            if search_term in i:
+                yield {
+                    "text": i,
+                    "id": i
+                }
+
+        if add_terms and not found:
+            yield {
+                "text": search_term,
+                "id": search_term
+            }
+
+
+class SubjectsSearch(CatalogIndexSearch):
+    _index = "Subject"

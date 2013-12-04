@@ -7,16 +7,17 @@
 
     var select2widgets = window.select2widgets;
 
-    select2widgets.select2InputWidget = function (trigger, settings) {
+    select2widgets.select2Widget = function (trigger, settings) {
         var self = this;
         $.extend(this, settings);
         self.trigger = $(trigger);
         self.init();
     };
 
-    select2widgets.select2InputWidget.prototype = {
+    select2widgets.select2Widget.prototype = {
         init: function () {
-            var self = this;
+            var self = this,
+                multiple = self.multiple ? true : false;
             self.trigger.select2({
                 minimumInputLength: 3,
                 width: 'element',
@@ -27,6 +28,9 @@
                     $(element.val().split(",")).each(function () {
                         data.push({id: this, text: initialValues[this]});
                     });
+                    if (! multiple) {
+                        data = data[0];
+                    }
                     callback(data);
                 },
 
@@ -45,13 +49,13 @@
                         };
                     }
                 },
-                multiple: true
+                multiple: multiple
             });
         }
     };
 
     $.fn.extend({
-        select2InputWidget: function (options) {
+        select2Widget: function (options) {
             return this.each(function () {
 
                 var settings = $.extend(true, {}, options),
@@ -61,9 +65,9 @@
 
                 // If the plugin hasn't been initialized yet
                 if (!data) {
-                    widget = new select2widgets.select2InputWidget(this, settings);
+                    widget = new select2widgets.select2Widget(this, settings);
 
-                    $(this).data('select2InputWidget', {
+                    $(this).data('select2Widget', {
                         widget: widget
                     });
                 }
@@ -72,7 +76,14 @@
     });
 
     $(document).ready(function() {
-        $('.select2-widget').select2InputWidget();
+        $('.select2-multi-widget').select2Widget({
+            multiple: true
+        });
+
+        $('.select2-widget').select2Widget({
+            multiple: false
+        });
+
     });
 
 }(jQuery));

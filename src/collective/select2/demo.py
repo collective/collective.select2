@@ -3,14 +3,14 @@ from zope.interface import Interface
 from zope.component.hooks import getSite
 from z3c.form import field, form, button
 from plone.z3cform.layout import wrap_form
-# from .widget import UserTokenFieldWidget
-from .widget import Select2FieldWidget
+
+from .field import Select2MultiField
 from .field import Select2Field
 
 
 class ISchema(Interface):
 
-    users = Select2Field(
+    users = Select2MultiField(
         title=u"Users",
         value_type=schema.Choice(
             title=u"User ID",
@@ -20,14 +20,19 @@ class ISchema(Interface):
         required=True
     )
 
-    categories = Select2Field(
+    user = Select2Field(
+        title=u"Single User",
+        source="plone.app.vocabularies.Users",
+        search_view=lambda x: '{}/select2-users-search'.format(x),
+        required=True
+    )
+
+    categories = Select2MultiField(
         title=u"Categories",
-        value_type=schema.Choice(
-            title=u"Category",
-            source="plone.app.vocabularies.Keywords"
+        value_type=schema.TextLine(
+            title=u"Category"
         ),
         search_view=lambda x: '{}/select2-subjects-search'.format(x),
-        add_terms=True,
         required=False
     )
 

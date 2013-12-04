@@ -5,20 +5,38 @@
     i18n_domain="collective.select2">
 
 
+  <!-- widget factories -->
+  <adapter
+    factory=".widget.Select2CollectionFieldWidget"
+    provides="z3c.form.interfaces.IFieldWidget"
+    for=".interfaces.ISelect2MultiField
+         zope.schema.interfaces.IChoice
+         z3c.form.interfaces.IFormLayer"
+    />
+
+  <adapter
+    factory=".widget.Select2MultiFieldWidget"
+    provides="z3c.form.interfaces.IFieldWidget"
+    for=".interfaces.ISelect2MultiField
+         zope.schema.interfaces.ITextLine
+         z3c.form.interfaces.IFormLayer"
+    />
+
+
   <adapter
     factory=".widget.Select2FieldWidget"
     provides="z3c.form.interfaces.IFieldWidget"
     for=".interfaces.ISelect2Field
-         zope.schema.interfaces.IField
          z3c.form.interfaces.IFormLayer"
     />
+
 
   <!-- widget templates -->
   <z3c:widgetTemplate
     mode="input"
-    template="input.pt"
-    layer="z3c.form.interfaces.IFormLayer"
     widget=".interfaces.ISelect2Widget"
+    layer="z3c.form.interfaces.IFormLayer"
+    template="input.pt"
     />
 
 
@@ -36,11 +54,63 @@
     template="hidden.pt"
     />
 
+  <z3c:widgetTemplate
+    mode="input"
+    widget=".interfaces.ISelect2MultiWidget"
+    layer="z3c.form.interfaces.IFormLayer"
+    template="input.pt"
+    />
+
+
+   <z3c:widgetTemplate
+    mode="display"
+    widget=".interfaces.ISelect2MultiWidget"
+    layer="z3c.form.interfaces.IFormLayer"
+    template="display.pt"
+    />
+
+  <z3c:widgetTemplate
+    mode="hidden"
+    widget=".interfaces.ISelect2MultiWidget"
+    layer="z3c.form.interfaces.IFormLayer"
+    template="hidden.pt"
+    />
+
+
+  <z3c:widgetTemplate
+    mode="input"
+    widget=".interfaces.ISelect2CollectionWidget"
+    layer="z3c.form.interfaces.IFormLayer"
+    template="input.pt"
+    />
+
+   <z3c:widgetTemplate
+    mode="display"
+    widget=".interfaces.ISelect2CollectionWidget"
+    layer="z3c.form.interfaces.IFormLayer"
+    template="display.pt"
+    />
+
+  <z3c:widgetTemplate
+    mode="hidden"
+    widget=".interfaces.ISelect2CollectionWidget"
+    layer="z3c.form.interfaces.IFormLayer"
+    template="hidden.pt"
+    />
+
 
   <!-- converter -->
   <adapter
     for="zope.schema.interfaces.ISequence
-         .interfaces.ISelect2Widget"
+         .interfaces.ISelect2CollectionWidget"
+    provides="z3c.form.interfaces.IDataConverter"
+    factory=".converter.Select2CollectionConverter"
+  />
+
+
+  <adapter
+    for="zope.schema.interfaces.ISequence
+         .interfaces.ISelect2MultiWidget"
     provides="z3c.form.interfaces.IDataConverter"
     factory=".converter.Select2Converter"
   />

@@ -616,7 +616,7 @@ disabled look for disabled choices in the results dropdown
 
 /* Plone specific styles */
 .field .choice-field,
-.field input[type="hidden"].select2-widget {
+.field input[type="hidden"].select2-multi-widget {
     width: 30em
 }
 

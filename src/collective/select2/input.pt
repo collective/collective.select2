@@ -28,7 +28,7 @@
                     readonly view/readonly;
                     accesskey view/accesskey;
                     onselect view/onselect;
-                    value python:','.join(view.value);
+                    value view/formatted_value;
                     data-select2-initialvalues view/initial_values;
                     data-select2-url view/search_url" />
 </html>
