@@ -26,9 +26,11 @@
                         initialValues = self.trigger.data('select2Initialvalues');
 
                     $(element.val().split(",")).each(function () {
-                        data.push({id: this, text: initialValues[this]});
+                        if (this)
+                            data.push({id: this, text: initialValues[this]});
                     });
-                    if (! multiple) {
+
+                    if (data && (! multiple)) {
                         data = data[0];
                     }
                     callback(data);
