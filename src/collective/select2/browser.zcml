@@ -11,7 +11,7 @@
     />
 
   <browser:page
-    for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
     name="select2-users-search"
     class=".browser.UsersSearch"
     permission="zope2.View"
@@ -19,7 +19,7 @@
   />
 
   <browser:page
-    for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
+    for="plone.app.layout.navigation.interfaces.INavigationRoot"
     name="select2-subjects-search"
     class=".browser.SubjectsSearch"
     permission="zope2.View"

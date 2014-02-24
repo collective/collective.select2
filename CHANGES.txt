@@ -4,8 +4,11 @@ Changelog
 1.0-dev (unreleased)
 --------------------
 
+- Register categories and users search views to INavigationRoot
+  [gborelli]
+
 - Add specific fields for single and multiple selection widgets
-  [giorgio]
+  [gborelli]
 
 - Improved IUserTokenInputWidget and UserSearch view
   [gborelli]
