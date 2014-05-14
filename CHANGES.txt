@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.0-dev (unreleased)
---------------------
+1.0b (2014-05-14)
+-----------------
 
 - Register categories and users search views to INavigationRoot
   [gborelli]
