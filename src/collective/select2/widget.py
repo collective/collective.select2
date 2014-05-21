@@ -75,7 +75,10 @@ class Select2MultiWidget(BaseSelect2Widget, Widget):
             base = self.value
             if not isinstance(base, list):
                 base = self.value.split(',')
-            values = {token: token for token in base}
+            values = {}
+            for token in base:
+                values[token] = token
+
         return json.dumps(values)
 
     def extract(self, default=interfaces.NO_VALUE):
