@@ -24,6 +24,9 @@ class BaseSelect2Widget(widget.HTMLTextInputWidget):
     def initial_values(self):
         return {}
 
+    def placeholder(self):
+        return self.field.placeholder
+
     @property
     def search_url(self):
         search_view = self.field.search_view
