@@ -20,6 +20,11 @@ class ISelect2Field(IChoice):
         description=u""
     )
 
+    placeholder = Field(
+        title=u"placeholder",
+        description=u""
+    )
+
 
 class ISelect2MultiField(IList):
     """It inherits from IList and add to the field the search_view
@@ -41,6 +46,7 @@ class ISelect2MultiField(IList):
     ...             source="plone.app.vocabularies.Users"
     ...         ),
     ...     search_view='search_url',
+    ...     placeholder='Select ones',
     ...     required=True
     ... )
 
@@ -51,6 +57,12 @@ class ISelect2MultiField(IList):
     search_view = Field(
         title=u"search view url",
         description=u""
+    )
+
+    placeholder = Field(
+        title=u"placeholder",
+        description=u"",
+        required=False
     )
 
 

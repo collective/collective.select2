@@ -29,6 +29,7 @@
                     accesskey view/accesskey;
                     onselect view/onselect;
                     value view/formatted_value;
+                    data-placeholder view/placeholder;
                     data-select2-initialvalues view/initial_values;
                     data-select2-url view/search_url" />
 </html>
