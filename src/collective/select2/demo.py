@@ -24,6 +24,7 @@ class ISchema(Interface):
         title=u"Single User",
         source="plone.app.vocabularies.Users",
         search_view=lambda x: '{}/select2-users-search'.format(x),
+        placeholder="Search and select a User",
         required=True
     )
 

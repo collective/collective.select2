@@ -5,6 +5,8 @@
     i18n_domain="collective.select2">
 
 
+  <include package="z3c.form" file="meta.zcml" />
+
   <!-- widget factories -->
   <adapter
     factory=".widget.Select2CollectionFieldWidget"

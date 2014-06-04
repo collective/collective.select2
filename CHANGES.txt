@@ -4,6 +4,12 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- Fixed z3c.form meta.zcml include
+  [gborelli]
+
+- Restricted demo view to Manager role
+  [gborelli]
+
 - Add placeholder attribute on single and multiple selection widgets
   [jslucas]
 
