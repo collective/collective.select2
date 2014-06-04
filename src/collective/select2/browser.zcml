@@ -16,7 +16,7 @@
     class=".browser.UsersSearch"
     permission="zope2.View"
     layer=".interfaces.IBrowserLayer"
-  />
+    />
 
   <browser:page
     for="plone.app.layout.navigation.interfaces.INavigationRoot"
@@ -24,14 +24,14 @@
     class=".browser.SubjectsSearch"
     permission="zope2.View"
     layer=".interfaces.IBrowserLayer"
-  />
+    />
 
   <browser:page
     for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"
     name="demo-select2"
     class=".demo.View"
-    permission="zope2.View"
     layer=".interfaces.IBrowserLayer"
-  />
+    permission="cmf.ManagePortal"
+    />
 
 </configure>
