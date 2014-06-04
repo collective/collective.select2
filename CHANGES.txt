@@ -4,7 +4,8 @@ Changelog
 1.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Add placeholder attribute on single and multiple selection widgets
+  [jslucas]
 
 
 1.0b (2014-05-14)
