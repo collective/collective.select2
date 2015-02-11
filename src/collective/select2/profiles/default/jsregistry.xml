@@ -9,7 +9,7 @@
       expression=""
       id="++resource++select2widgets/select2/select2.min.js"
       inline="False" />
-
+  
   <javascript
       cacheable="True"
       compression="safe"

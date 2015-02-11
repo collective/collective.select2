@@ -35,6 +35,8 @@ setup(name='collective.select2',
           'Products.CMFCore'
       ],
       entry_points="""
-      # -*- Entry points: -*-
-      """,
+            # -*- Entry points: -*-
+            [z3c.autoinclude.plugin]
+            target = plone
+            """,
       )

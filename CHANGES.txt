@@ -4,7 +4,7 @@ Changelog
 1.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Updated select2 version: 4.0.0b3 [cekk]
 
 
 1.1 (2014-06-04)
