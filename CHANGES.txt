@@ -4,8 +4,8 @@ Changelog
 1.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
-
+- upgrade select2.js to 3.5.4
+  [mamico]
 
 1.1 (2014-06-04)
 ----------------
